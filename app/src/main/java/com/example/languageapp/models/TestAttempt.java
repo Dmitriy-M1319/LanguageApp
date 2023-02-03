@@ -12,9 +12,9 @@ public class TestAttempt {
      */
     private int id;
     /**
-     * Дата прохождения теста
+     * Дата прохождения теста (ДД-ММ-ГГГГ:ЧЧ-ММ)
      */
-    private Date testDate;
+    private String testDate;
     /**
      * Результат попытки в процентах (от 0 до 100)
      */
@@ -24,7 +24,7 @@ public class TestAttempt {
      */
     private TestVariant variant;
 
-    public TestAttempt(int id, Date date, int percentResult, TestVariant variant) {
+    public TestAttempt(int id, String date, int percentResult, TestVariant variant) {
         this.id = id;
         this.testDate = date;
         this.percentResult = percentResult;
@@ -35,7 +35,7 @@ public class TestAttempt {
         return id;
     }
 
-    public Date getTestDate() {
+    public String getTestDate() {
         return testDate;
     }
 
