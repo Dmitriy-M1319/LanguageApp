@@ -6,13 +6,51 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:rowCount="2"
+        android:columnCount="2">
+
+        <Button
+            android:id="@+id/showCardsButton"
+            android:layout_width="141dp"
+            android:layout_height="141dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="center"
+            android:onClick="onShowCardsButtonClick"
+            android:text="Мои карточки" />
+
+        <Button
+            android:id="@+id/addCardButton"
+            android:layout_width="141dp"
+            android:layout_height="141dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="center"
+            android:onClick="onAddCardButtonClick"
+            android:text="Добавить карточку" />
+
+        <Button
+            android:id="@+id/startTestButton"
+            android:layout_width="141dp"
+            android:layout_height="141dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="center"
+            android:onClick="onStartTestButtonClick"
+            android:text="Пройти тест" />
+
+        <Button
+            android:id="@+id/showAttemptsButton"
+            android:layout_width="141dp"
+            android:layout_height="141dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="center"
+            android:onClick="onShowAttemptsButtonClick"
+            android:text="Прошлые попытки" />
+    </GridLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

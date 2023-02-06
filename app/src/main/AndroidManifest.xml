@@ -12,6 +12,15 @@
         android:theme="@style/Theme.LanguageApp"
         tools:targetApi="31">
         <activity
+            android:name=".CardUpdateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CardShowActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CardCreateActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

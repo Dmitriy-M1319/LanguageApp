@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Language App</string>
+    <string name="btn1">btn1</string>
+    <string name="btn2" />
 </resources>
