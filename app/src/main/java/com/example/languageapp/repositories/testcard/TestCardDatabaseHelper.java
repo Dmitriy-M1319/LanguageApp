@@ -10,7 +10,7 @@ public class TestCardDatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE = "test_cards";
 
     public static final String COLUMN_ID = "id";
-    public static final String COLUMN_PARENT_CARD_ID = "parent_card_id";
+    public static final String COLUMN_CHECKED_WORD = "checked_word";
     public static final String COLUMN_USER_ANSWER = "user_answer";
     public static final String COLUMN_RESULT = "result";
     public static final String COLUMN_TEST_ATTEMPT_ID = "test_attempt_id" ;
@@ -22,8 +22,7 @@ public class TestCardDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("CREATE TABLE " + TABLE + " (" + COLUMN_ID
-                + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_PARENT_CARD_ID + " INTEGER,"
-                + "FOREIGN KEY (" + COLUMN_PARENT_CARD_ID  + ") REFERENCES cards (id),"
+                + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_CHECKED_WORD + " TEXT,"
                 + COLUMN_USER_ANSWER + " TEXT," + COLUMN_RESULT + " TEXT,"
                 + COLUMN_TEST_ATTEMPT_ID + " INTEGER," + "FOREIGN KEY (" + COLUMN_TEST_ATTEMPT_ID + ") REFERENCES test_attempts (id));");
     }

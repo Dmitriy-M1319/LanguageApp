@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.languageapp.models.Card;
 import com.example.languageapp.models.TestAttempt;
 import com.example.languageapp.models.TestCard;
 import com.example.languageapp.repositories.card.CardDatabaseRepository;
@@ -41,7 +40,7 @@ public class TestCardDatabaseRepository {
 
     public Cursor getAllEntries() {
         String[] columns = new String[]{TestCardDatabaseHelper.COLUMN_ID,
-                TestCardDatabaseHelper.COLUMN_PARENT_CARD_ID,
+                TestCardDatabaseHelper.COLUMN_CHECKED_WORD,
         TestCardDatabaseHelper.COLUMN_USER_ANSWER,
         TestCardDatabaseHelper.COLUMN_RESULT,
         TestCardDatabaseHelper.COLUMN_TEST_ATTEMPT_ID};
@@ -57,17 +56,14 @@ public class TestCardDatabaseRepository {
         Cursor cursor = getAllEntries();
         while (cursor.moveToNext()) {
             int id = cursor.getInt(cursor.getColumnIndex(TestCardDatabaseHelper.COLUMN_ID));
-            int cardId = cursor.getInt(cursor.getColumnIndex(TestCardDatabaseHelper.COLUMN_PARENT_CARD_ID));
-            cardRepository.open();
-            Card parentCard = cardRepository.getCardById(cardId);
-            cardRepository.close();
+            String word = cursor.getString(cursor.getColumnIndex(TestCardDatabaseHelper.COLUMN_CHECKED_WORD));
             String answer = cursor.getString(cursor.getColumnIndex(TestCardDatabaseHelper.COLUMN_USER_ANSWER));
             boolean result = Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex(TestCardDatabaseHelper.COLUMN_RESULT)));
             int testId = cursor.getInt(cursor.getColumnIndex(TestCardDatabaseHelper.COLUMN_TEST_ATTEMPT_ID));
             testRepository.open();
             TestAttempt attempt = testRepository.getAttemptById(testId);
             testRepository.close();
-            cards.add(new TestCard(id, parentCard, answer, result, attempt));
+            cards.add(new TestCard(id, word, answer, result, attempt));
         }
         cursor.close();
         return cards;
@@ -84,14 +80,11 @@ public class TestCardDatabaseRepository {
                 + TestCardDatabaseHelper.COLUMN_TEST_ATTEMPT_ID + "=?", new String[]{String.valueOf(attempt.getId())});
         while (cursor.moveToNext()) {
             int id = cursor.getInt(cursor.getColumnIndex(TestCardDatabaseHelper.COLUMN_ID));
-            int cardId = cursor.getInt(cursor.getColumnIndex(TestCardDatabaseHelper.COLUMN_PARENT_CARD_ID));
-            cardRepository.open();
-            Card parentCard = cardRepository.getCardById(cardId);
-            cardRepository.close();
+            String word = cursor.getString(cursor.getColumnIndex(TestCardDatabaseHelper.COLUMN_CHECKED_WORD));
             String answer = cursor.getString(cursor.getColumnIndex(TestCardDatabaseHelper.COLUMN_USER_ANSWER));
             boolean result = Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex(TestCardDatabaseHelper.COLUMN_RESULT)));
             int testId = cursor.getInt(cursor.getColumnIndex(TestCardDatabaseHelper.COLUMN_TEST_ATTEMPT_ID));
-            cards.add(new TestCard(id, parentCard, answer, result, attempt));
+            cards.add(new TestCard(id, word, answer, result, attempt));
         }
         cursor.close();
         return cards;
@@ -122,7 +115,7 @@ public class TestCardDatabaseRepository {
         }
 
         ContentValues cv = new ContentValues();
-        cv.put(TestCardDatabaseHelper.COLUMN_PARENT_CARD_ID, testCard.getParentCard().getId());
+        cv.put(TestCardDatabaseHelper.COLUMN_CHECKED_WORD, testCard.getCheckedWord());
         cv.put(TestCardDatabaseHelper.COLUMN_RESULT, testCard.isResult());
         cv.put(TestCardDatabaseHelper.COLUMN_USER_ANSWER, testCard.getUserAnswer());
         cv.put(TestCardDatabaseHelper.COLUMN_TEST_ATTEMPT_ID, testCard.getTestAttempt().getId());

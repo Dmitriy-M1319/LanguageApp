@@ -9,9 +9,9 @@ public class TestCard {
      */
     private int id;
     /**
-     * Ссылка на карточку, знания по которой проверяются в данный момент
+     * Cлово из карточки, знания по которой проверяются в данный момент
      */
-    private Card parentCard;
+    private String checkedWord;
     /**
      * Ответ пользователя
      */
@@ -25,9 +25,9 @@ public class TestCard {
      */
     private TestAttempt testAttempt;
 
-    public TestCard(int id, Card parentCard, String userAnswer, boolean result, TestAttempt testAttempt) {
+    public TestCard(int id, String checkedWord, String userAnswer, boolean result, TestAttempt testAttempt) {
        this.id = id;
-       this.parentCard = parentCard;
+       this.checkedWord = checkedWord;
        this.userAnswer = userAnswer;
        this.result = result;
        this.testAttempt = testAttempt;
@@ -37,8 +37,8 @@ public class TestCard {
         return id;
     }
 
-    public Card getParentCard() {
-        return parentCard;
+    public String getCheckedWord() {
+        return checkedWord;
     }
 
     public String getUserAnswer() {
