@@ -12,6 +12,9 @@
         android:theme="@style/Theme.LanguageApp"
         tools:targetApi="31">
         <activity
+            android:name=".TestCardShowActivity"
+            android:exported="false" />
+        <activity
             android:name=".TestAttemptsShowActivity"
             android:exported="false" />
         <activity

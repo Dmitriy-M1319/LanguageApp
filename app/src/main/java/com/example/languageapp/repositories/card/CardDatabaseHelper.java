@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class CardDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "language_app";
-    private static final int SCHEMA = 2;
+    private static final int SCHEMA = 3;
     public static final String TABLE = "cards";
 
     public static final String COLUMN_ID = "id";

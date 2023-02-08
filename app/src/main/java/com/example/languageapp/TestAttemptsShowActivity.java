@@ -2,6 +2,7 @@ package com.example.languageapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -35,6 +36,9 @@ public class TestAttemptsShowActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 TestAttempt attempt = (TestAttempt) adapterView.getItemAtPosition(i);
+                Intent intent = new Intent(getApplicationContext(), TestCardShowActivity.class);
+                intent.putExtra(TestAttempt.class.getSimpleName(), attempt);
+                startActivity(intent);
             }
         });
     }
