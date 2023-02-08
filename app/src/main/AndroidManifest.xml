@@ -12,6 +12,12 @@
         android:theme="@style/Theme.LanguageApp"
         tools:targetApi="31">
         <activity
+            android:name=".TestProcessActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TestVariantActivity"
+            android:exported="false" />
+        <activity
             android:name=".CardUpdateActivity"
             android:exported="false" />
         <activity

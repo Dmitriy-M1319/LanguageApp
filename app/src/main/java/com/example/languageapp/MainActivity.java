@@ -36,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onStartTestButtonClick(View view) {
-
+        Intent intent = new Intent(this, TestVariantActivity.class);
+        startActivity(intent);
     }
 
     public void onShowAttemptsButtonClick(View view) {
