@@ -1,11 +1,12 @@
 package com.example.languageapp.models;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Модель попытки теста на правильное определение иностранных слов и их переводов
  */
-public class TestAttempt {
+public class TestAttempt implements Serializable {
 
     /**
      * ID попытки тестирования для ее хранения в базе данных
@@ -41,6 +42,10 @@ public class TestAttempt {
 
     public int getPercentResult() {
         return percentResult;
+    }
+
+    public void setPercentResult(int percentResult) {
+        this.percentResult = percentResult;
     }
 
     public TestVariant getVariant() {
