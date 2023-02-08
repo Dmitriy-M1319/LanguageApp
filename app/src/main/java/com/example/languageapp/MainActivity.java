@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onShowAttemptsButtonClick(View view) {
-
+        Intent intent = new Intent(this, TestAttemptsShowActivity.class);
+        startActivity(intent);
     }
 }

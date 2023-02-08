@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class TestAttemptDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "language_app";
-    private static final int SCHEMA = 1;
+    private static final int SCHEMA = 2;
     public static final String TABLE = "test_attempts";
 
     public static final String COLUMN_ID = "id";
