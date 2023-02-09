@@ -13,7 +13,7 @@ import com.example.languageapp.models.TestAttempt;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class TestAttemptAdapter extends ArrayAdapter {
+public class TestAttemptAdapter extends ArrayAdapter<TestAttempt> {
 
     private LayoutInflater inflater;
     private int resource;

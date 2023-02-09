@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.languageapp.models.Card;
+import com.example.languageapp.repositories.helper.CommonDatabaseHelper;
+import com.example.languageapp.repositories.helper.DbCards;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +16,11 @@ import java.util.List;
  * Репозиторий для операций с карточками в базе данных
  */
 public class CardDatabaseRepository {
-    private CardDatabaseHelper dbHelper;
+    private CommonDatabaseHelper dbHelper;
     private SQLiteDatabase database;
 
     public CardDatabaseRepository(Context context) {
-        dbHelper = new CardDatabaseHelper(context.getApplicationContext());
+        dbHelper = new CommonDatabaseHelper(context.getApplicationContext());
     }
 
     /**
@@ -39,10 +41,10 @@ public class CardDatabaseRepository {
 
 
     private Cursor getEntries() {
-        String[] columns = new String[] {CardDatabaseHelper.COLUMN_ID,
-                CardDatabaseHelper.COLUMN_FOREIGN_WORD,
-                CardDatabaseHelper.COLUMN_TRANSLATED_WORD};
-        return database.query(CardDatabaseHelper.TABLE, columns, null, null, null, null, null);
+        String[] columns = new String[] {DbCards.COLUMN_ID,
+                DbCards.COLUMN_FOREIGN_WORD,
+                DbCards.COLUMN_TRANSLATED_WORD};
+        return database.query(DbCards.TABLE, columns, null, null, null, null, null);
     }
 
     /**
@@ -53,9 +55,9 @@ public class CardDatabaseRepository {
         List<Card> cards = new ArrayList<>();
         Cursor cursor = getEntries();
         while (cursor.moveToNext()) {
-           int id = cursor.getInt(cursor.getColumnIndex(CardDatabaseHelper.COLUMN_ID));
-           String foreign = cursor.getString(cursor.getColumnIndex(CardDatabaseHelper.COLUMN_FOREIGN_WORD));
-           String translated = cursor.getString(cursor.getColumnIndex(CardDatabaseHelper.COLUMN_TRANSLATED_WORD));
+           int id = cursor.getInt(cursor.getColumnIndex(DbCards.COLUMN_ID));
+           String foreign = cursor.getString(cursor.getColumnIndex(DbCards.COLUMN_FOREIGN_WORD));
+           String translated = cursor.getString(cursor.getColumnIndex(DbCards.COLUMN_TRANSLATED_WORD));
            cards.add(new Card(id, foreign, translated));
         }
         cursor.close();
@@ -69,11 +71,11 @@ public class CardDatabaseRepository {
      */
     public Card getCardById(long id) {
         Card card = null;
-        String query = "SELECT * FROM " + CardDatabaseHelper.TABLE + " WHERE " + CardDatabaseHelper.COLUMN_ID + "=?";
+        String query = "SELECT * FROM " + DbCards.TABLE + " WHERE " + DbCards.COLUMN_ID + "=?";
         Cursor cursor = database.rawQuery(query, new String[]{String.valueOf(id)});
         if(cursor.moveToFirst()) {
-            String foreign = cursor.getString(cursor.getColumnIndex(CardDatabaseHelper.COLUMN_FOREIGN_WORD));
-            String translated = cursor.getString(cursor.getColumnIndex(CardDatabaseHelper.COLUMN_TRANSLATED_WORD));
+            String foreign = cursor.getString(cursor.getColumnIndex(DbCards.COLUMN_FOREIGN_WORD));
+            String translated = cursor.getString(cursor.getColumnIndex(DbCards.COLUMN_TRANSLATED_WORD));
             card = new Card(id, foreign, translated);
         }
         cursor.close();
@@ -89,9 +91,9 @@ public class CardDatabaseRepository {
         if(card == null)
             return -1;
         ContentValues cv = new ContentValues();
-        cv.put(CardDatabaseHelper.COLUMN_FOREIGN_WORD, card.getForeignWord());
-        cv.put(CardDatabaseHelper.COLUMN_TRANSLATED_WORD, card.getTranslatedWord());
-        return database.insert(CardDatabaseHelper.TABLE, null, cv);
+        cv.put(DbCards.COLUMN_FOREIGN_WORD, card.getForeignWord());
+        cv.put(DbCards.COLUMN_TRANSLATED_WORD, card.getTranslatedWord());
+        return database.insert(DbCards.TABLE, null, cv);
     }
 
     /**
@@ -102,11 +104,11 @@ public class CardDatabaseRepository {
     public long update(Card card) {
         if(card == null)
             return -1;
-        String whereCondidion = CardDatabaseHelper.COLUMN_ID + "=" + card.getId();
+        String whereCondidion = DbCards.COLUMN_ID + "=" + card.getId();
         ContentValues cv = new ContentValues();
-        cv.put(CardDatabaseHelper.COLUMN_FOREIGN_WORD, card.getForeignWord());
-        cv.put(CardDatabaseHelper.COLUMN_TRANSLATED_WORD, card.getTranslatedWord());
-        return database.update(CardDatabaseHelper.TABLE, cv, whereCondidion, null);
+        cv.put(DbCards.COLUMN_FOREIGN_WORD, card.getForeignWord());
+        cv.put(DbCards.COLUMN_TRANSLATED_WORD, card.getTranslatedWord());
+        return database.update(DbCards.TABLE, cv, whereCondidion, null);
     }
 
     /**
@@ -117,8 +119,8 @@ public class CardDatabaseRepository {
     public long delete(Card card) {
         if(card == null)
             return -1;
-        String whereCondidion = CardDatabaseHelper.COLUMN_ID + "=?";
+        String whereCondidion = DbCards.COLUMN_ID + "=?";
         String[] whereArgs = new String[] {String.valueOf(card.getId())};
-        return database.delete(CardDatabaseHelper.TABLE, whereCondidion, whereArgs);
+        return database.delete(DbCards.TABLE, whereCondidion, whereArgs);
     }
 }

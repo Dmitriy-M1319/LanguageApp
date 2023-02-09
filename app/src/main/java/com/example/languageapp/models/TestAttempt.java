@@ -36,8 +36,15 @@ public class TestAttempt implements Serializable {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getTestDate() {
         return testDate;
+    }
+    public void setTestDate(String testDate) {
+        this.testDate = testDate;
     }
 
     public int getPercentResult() {
@@ -50,5 +57,9 @@ public class TestAttempt implements Serializable {
 
     public TestVariant getVariant() {
         return variant;
+    }
+
+    public void setVariant(TestVariant variant) {
+        this.variant = variant;
     }
 }

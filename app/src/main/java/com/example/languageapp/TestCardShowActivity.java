@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,7 +26,11 @@ public class TestCardShowActivity extends AppCompatActivity {
         setContentView(R.layout.activity_test_card_show);
 
         Bundle extras = getIntent().getExtras();
-        TestAttempt attempt = (TestAttempt) extras.getSerializable(TestAttempt.class.getSimpleName());
+        TestAttempt attempt = (TestAttempt) extras.getSerializable("attempt");
+        if(attempt == null) {
+            Log.w(TestCardShowActivity.class.getSimpleName(), "Extras: null");
+        }
+        header = findViewById(R.id.header);
         header.setText("Вопросы из попытки № " + attempt.getId());
         testCardRepository = new TestCardDatabaseRepository(this);
         testCardRepository.open();

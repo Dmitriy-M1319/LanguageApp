@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,7 +18,6 @@ import java.time.LocalDateTime;
 public class TestResultActivity extends AppCompatActivity {
 
     private Button homeButton;
-    private TestAttemptDatabaseRepository testRepository;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +26,6 @@ public class TestResultActivity extends AppCompatActivity {
         TestAttempt attempt;
         Bundle extras = getIntent().getExtras();
         attempt = (TestAttempt) extras.getSerializable(TestAttempt.class.getSimpleName());
-        testRepository = new TestAttemptDatabaseRepository(this);
 
         homeButton = findViewById(R.id.home);
         TextView dateText = findViewById(R.id.test_date);
@@ -53,13 +52,11 @@ public class TestResultActivity extends AppCompatActivity {
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                testRepository.open();
-                testRepository.insert(attempt);
-                testRepository.close();
                 goHome();
             }
         });
     }
+
 
     public void goHome() {
         Intent intent = new Intent(this, MainActivity.class);

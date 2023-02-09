@@ -36,8 +36,8 @@ public class CardUpdateActivity extends AppCompatActivity {
     }
 
     public void onUpdateCardClick(View view){
-        String newForeignWord = foreignWord.getText().toString();
-        String newTranslatedWord = translatedWord.getText().toString();
+        String newForeignWord = foreignWord.getText().toString().trim();
+        String newTranslatedWord = translatedWord.getText().toString().trim();
 
         Card card = new Card(cardId, newForeignWord, newTranslatedWord);
         cardRepository.open();

@@ -26,8 +26,8 @@ public class CardCreateActivity extends AppCompatActivity {
     }
 
     public void onCreateCardClick(View view) {
-        String foreign = foreignWord.getText().toString();
-        String translated = translatedWord.getText().toString();
+        String foreign = foreignWord.getText().toString().trim();
+        String translated = translatedWord.getText().toString().trim();
         if(foreign.equals("") || translated.equals(""))
             return;
 

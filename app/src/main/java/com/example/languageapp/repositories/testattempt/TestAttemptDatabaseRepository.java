@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.languageapp.models.TestAttempt;
 import com.example.languageapp.models.TestVariant;
+import com.example.languageapp.repositories.helper.CommonDatabaseHelper;
+import com.example.languageapp.repositories.helper.DbTestAttempt;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +17,11 @@ import java.util.List;
  * Репозиторий для операций с попытками тестирования в базе данных
  */
 public class TestAttemptDatabaseRepository {
-    private TestAttemptDatabaseHelper dbHelper;
+    private CommonDatabaseHelper dbHelper;
     private SQLiteDatabase database;
 
     public TestAttemptDatabaseRepository(Context context) {
-        dbHelper = new TestAttemptDatabaseHelper(context.getApplicationContext());
+        dbHelper = new CommonDatabaseHelper(context.getApplicationContext());
     }
 
     /**
@@ -40,11 +42,11 @@ public class TestAttemptDatabaseRepository {
 
 
     private Cursor getEntries() {
-        String[] columns = new String[] {TestAttemptDatabaseHelper.COLUMN_ID,
-                TestAttemptDatabaseHelper.COLUMN_TEST_DATE,
-                TestAttemptDatabaseHelper.COLUMN_PERCENT_RESULT,
-                TestAttemptDatabaseHelper.COLUMN_VARIANT};
-        return database.query(TestAttemptDatabaseHelper.TABLE, columns, null, null, null, null, null);
+        String[] columns = new String[] {DbTestAttempt.COLUMN_ID,
+                DbTestAttempt.COLUMN_TEST_DATE,
+                DbTestAttempt.COLUMN_PERCENT_RESULT,
+                DbTestAttempt.COLUMN_VARIANT};
+        return database.query(DbTestAttempt.TABLE, columns, null, null, null, null, null);
     }
 
     /**
@@ -55,10 +57,10 @@ public class TestAttemptDatabaseRepository {
         List<TestAttempt> attempts = new ArrayList<>();
         Cursor cursor = getEntries();
         while (cursor.moveToNext()) {
-            int id = cursor.getInt(cursor.getColumnIndex(TestAttemptDatabaseHelper.COLUMN_ID));
-            int percent = cursor.getInt(cursor.getColumnIndex(TestAttemptDatabaseHelper.COLUMN_PERCENT_RESULT));
-            String date = cursor.getString(cursor.getColumnIndex(TestAttemptDatabaseHelper.COLUMN_TEST_DATE));
-            TestVariant variant = TestVariant.getVariantByNumber(cursor.getInt(cursor.getColumnIndex(TestAttemptDatabaseHelper.COLUMN_VARIANT)));
+            int id = cursor.getInt(cursor.getColumnIndex(DbTestAttempt.COLUMN_ID));
+            int percent = cursor.getInt(cursor.getColumnIndex(DbTestAttempt.COLUMN_PERCENT_RESULT));
+            String date = cursor.getString(cursor.getColumnIndex(DbTestAttempt.COLUMN_TEST_DATE));
+            TestVariant variant = TestVariant.getVariantByNumber(cursor.getInt(cursor.getColumnIndex(DbTestAttempt.COLUMN_VARIANT)));
             attempts.add(new TestAttempt(id, date, percent, variant));
         }
         cursor.close();
@@ -72,12 +74,12 @@ public class TestAttemptDatabaseRepository {
      */
     public TestAttempt getAttemptById(int id) {
         TestAttempt testAttempt = null;
-        String query = "SELECT * FROM " + TestAttemptDatabaseHelper.TABLE + " WHERE " + TestAttemptDatabaseHelper.COLUMN_ID + "=?";
+        String query = "SELECT * FROM " + DbTestAttempt.TABLE + " WHERE " + DbTestAttempt.COLUMN_ID + "=?";
         Cursor cursor = database.rawQuery(query, new String[]{String.valueOf(id)});
         if(cursor.moveToFirst()) {
-            int percent = cursor.getInt(cursor.getColumnIndex(TestAttemptDatabaseHelper.COLUMN_PERCENT_RESULT));
-            String date = cursor.getString(cursor.getColumnIndex(TestAttemptDatabaseHelper.COLUMN_TEST_DATE));
-            TestVariant variant = TestVariant.getVariantByNumber(cursor.getInt(cursor.getColumnIndex(TestAttemptDatabaseHelper.COLUMN_VARIANT)));
+            int percent = cursor.getInt(cursor.getColumnIndex(DbTestAttempt.COLUMN_PERCENT_RESULT));
+            String date = cursor.getString(cursor.getColumnIndex(DbTestAttempt.COLUMN_TEST_DATE));
+            TestVariant variant = TestVariant.getVariantByNumber(cursor.getInt(cursor.getColumnIndex(DbTestAttempt.COLUMN_VARIANT)));
             testAttempt = new TestAttempt(id, date, percent, variant);
         }
         cursor.close();
@@ -94,10 +96,10 @@ public class TestAttemptDatabaseRepository {
            return -1;
 
        ContentValues values = new ContentValues();
-       values.put(TestAttemptDatabaseHelper.COLUMN_TEST_DATE, attempt.getTestDate());
-       values.put(TestAttemptDatabaseHelper.COLUMN_PERCENT_RESULT, attempt.getPercentResult());
-       values.put(TestAttemptDatabaseHelper.COLUMN_VARIANT, attempt.getVariant().toInt());
-       return database.insert(TestAttemptDatabaseHelper.TABLE, null, values);
+       values.put(DbTestAttempt.COLUMN_TEST_DATE, attempt.getTestDate());
+       values.put(DbTestAttempt.COLUMN_PERCENT_RESULT, attempt.getPercentResult());
+       values.put(DbTestAttempt.COLUMN_VARIANT, attempt.getVariant().toInt());
+       return database.insert(DbTestAttempt.TABLE, null, values);
     }
 
     // Обновление прошедших попыткок не требуется
@@ -111,9 +113,9 @@ public class TestAttemptDatabaseRepository {
         if(attempt == null)
             return -1;
 
-        String whereCondition = TestAttemptDatabaseHelper.TABLE + "=;";
+        String whereCondition = DbTestAttempt.TABLE + "=;";
         String[] whereArgs = new String[]{String.valueOf(attempt.getId())};
-        return database.delete(TestAttemptDatabaseHelper.TABLE, whereCondition, whereArgs);
+        return database.delete(DbTestAttempt.TABLE, whereCondition, whereArgs);
     }
 
 }

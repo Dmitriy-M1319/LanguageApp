@@ -15,6 +15,7 @@ import com.example.languageapp.models.TestAttempt;
 import com.example.languageapp.models.TestCard;
 import com.example.languageapp.models.TestVariant;
 import com.example.languageapp.repositories.card.CardDatabaseRepository;
+import com.example.languageapp.repositories.testattempt.TestAttemptDatabaseRepository;
 import com.example.languageapp.repositories.testcard.TestCardDatabaseRepository;
 
 import java.time.LocalDateTime;
@@ -34,6 +35,7 @@ public class TestProcessActivity extends AppCompatActivity {
     private EditText answerField;
     private int questionNumber = 1;
     private TestCardDatabaseRepository testCardRepository;
+    private TestAttemptDatabaseRepository testRepository;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +45,7 @@ public class TestProcessActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         variant = TestVariant.getVariantByNumber(extras.getInt("variant"));
         testCardRepository = new TestCardDatabaseRepository(this);
+        testRepository = new TestAttemptDatabaseRepository(this);
 
         newAttempt = new TestAttempt(0, LocalDateTime.now().toString(), 0, variant);
         attemptCards = new ArrayList<>();
@@ -83,7 +86,7 @@ public class TestProcessActivity extends AppCompatActivity {
     }
 
     protected void checkResult() {
-        currentTestCard.setUserAnswer(answerField.getText().toString());
+        currentTestCard.setUserAnswer(answerField.getText().toString().trim());
         String trueResult = newAttempt.getVariant() == TestVariant.TEST_FOREIGN_WORDS ? currentCard.getTranslatedWord() : currentCard.getForeignWord();
         currentTestCard.setResult(currentTestCard.getUserAnswer().equals(trueResult));
         attemptCards.add(currentTestCard);
@@ -94,16 +97,24 @@ public class TestProcessActivity extends AppCompatActivity {
     protected void closeTestAttempt() {
         int totalCount = attemptCards.size();
         int goodResultsCount = 0;
-        testCardRepository.open();
         for (TestCard testCard: attemptCards) {
             if(testCard.isResult()) {
                 goodResultsCount++;
             }
+        }
+        double percents = (double)goodResultsCount / totalCount * 100;
+        newAttempt.setPercentResult((int)percents);
+
+        testRepository.open();
+        long i = testRepository.insert(newAttempt);
+        testRepository.close();
+
+        testCardRepository.open();
+        for (TestCard testCard: attemptCards) {
+            testCard.getTestAttempt().setId((int)i);
             testCardRepository.insert(testCard);
         }
         testCardRepository.close();
-        double percents = (double)goodResultsCount / totalCount * 100;
-        newAttempt.setPercentResult((int)percents);
 
         Intent intent = new Intent(getApplicationContext(), TestResultActivity.class);
         intent.putExtra(TestAttempt.class.getSimpleName(), newAttempt);

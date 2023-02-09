@@ -1,9 +1,11 @@
 package com.example.languageapp.models;
 
+import java.io.Serializable;
+
 /**
  * Перечесление, которое определяет варианты тестирования со словами
  */
-public enum TestVariant {
+public enum TestVariant implements Serializable {
     TEST_FOREIGN_WORDS,
     TEST_TRANSLATED_WORD;
 
