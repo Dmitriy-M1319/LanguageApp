@@ -5,12 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+    android:paddingLeft="20dp"
+    android:paddingRight ="20dp"
     tools:context=".CardCreateActivity">
 
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintWidth_default="percent"
         app:layout_constraintHeight_default="percent"
@@ -22,6 +25,7 @@
         tools:ignore="MissingConstraints">
         <TextView
             android:layout_width="match_parent"
+            android:textAlignment="center"
             android:layout_height="wrap_content"
             android:text="Добавление новой карточки"
             android:textSize="26sp"/>
@@ -42,6 +46,51 @@
             android:layout_height="wrap_content"
             android:onClick="onCreateCardClick"
             android:text="Добавить"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Или найти перевод в словаре"
+            android:textSize="24sp"/>
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:rowCount="2"
+                android:columnCount="2">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="Язык искомого слова: "
+                    android:textSize="19sp"/>
+                <Spinner
+                    android:id="@+id/foreignSpinner"
+                    android:entries="@array/languages_full"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="Язык перевода: "
+                    android:textSize="19sp"/>
+                <Spinner
+                    android:id="@+id/localSpinner"
+                    android:entries="@array/languages_full"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </GridLayout>
+        <EditText
+            android:id="@+id/netForeigndWord"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="Введите искомое слово"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onFindWordClick"
+            android:text="Найти"/>
     </LinearLayout>
 
 
