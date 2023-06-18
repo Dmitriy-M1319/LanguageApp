@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient"
     tools:context=".TestAttemptsShowActivity">
     <TextView
         android:id="@+id/tests_show_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:text="Мои попытки"
         android:textSize="26sp"
         android:gravity="center"

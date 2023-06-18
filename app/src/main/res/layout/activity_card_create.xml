@@ -4,54 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="20dp"
-    android:paddingBottom="20dp"
-    android:paddingLeft="20dp"
-    android:paddingRight ="20dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:background="@drawable/gradient"
+    android:paddingLeft="10dp"
+    android:paddingRight ="10dp"
     tools:context=".CardCreateActivity">
 
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintWidth_default="percent"
-        app:layout_constraintHeight_default="percent"
-        app:layout_constraintWidth_percent="0.9"
-        app:layout_constraintHeight_percent="0.5"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:background="@color/cardview_dark_background"
-        tools:ignore="MissingConstraints">
-        <TextView
+        android:layout_height="match_parent">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:textAlignment="center"
-            android:layout_height="wrap_content"
-            android:text="Добавление новой карточки"
-            android:textSize="26sp"/>
-        <EditText
-            android:id="@+id/foreignWord"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:hint="Введите иностранное слово"/>
-        <EditText
-            android:id="@+id/translatedWord"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:hint="Введите перевод"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onCreateCardClick"
-            android:text="Добавить"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="Или найти перевод в словаре"
-            android:textSize="24sp"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintHeight_default="percent"
+            app:layout_constraintWidth_percent="0.9"
+            app:layout_constraintHeight_percent="0.5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@drawable/gradient"
+            tools:ignore="MissingConstraints" >
+            <TextView
+                android:layout_width="match_parent"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                android:text="Добавление новой карточки"
+                android:textSize="26sp"/>
+            <EditText
+                android:id="@+id/foreignWord"
+                android:layout_width="match_parent"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="Введите иностранное слово"/>
+            <EditText
+                android:id="@+id/translatedWord"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="Введите перевод"/>
+            <Button
+                android:layout_width="200dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:onClick="onCreateCardClick"
+                android:text="Добавить"/>
+            <TextView
+                android:layout_marginTop="320dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textAlignment="center"
+                android:text="Или найти перевод в словаре"
+                android:textSize="24sp"/>
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,16 +76,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
                     android:text="Язык искомого слова: "
                     android:textSize="19sp"/>
                 <Spinner
                     android:id="@+id/foreignSpinner"
+
                     android:entries="@array/languages_full"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
                     android:textAlignment="center"
                     android:text="Язык перевода: "
                     android:textSize="19sp"/>
@@ -80,18 +100,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </GridLayout>
-        <EditText
-            android:id="@+id/netForeigndWord"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:hint="Введите искомое слово"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onFindWordClick"
-            android:text="Найти"/>
-    </LinearLayout>
+            <EditText
+                android:id="@+id/netForeigndWord"
+                android:layout_width="match_parent"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="Введите искомое слово"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onFindWordClick"
+                android:text="Найти"/>
+        </LinearLayout>
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

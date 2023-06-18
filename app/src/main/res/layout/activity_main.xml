@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <GridLayout
+        android:background="@drawable/gradient"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:rowCount="2"
@@ -14,6 +15,7 @@
 
         <Button
             android:id="@+id/showCardsButton"
+            style="@style/Widget.AppCompat.Button"
             android:layout_width="141dp"
             android:layout_height="141dp"
             android:layout_rowWeight="1"

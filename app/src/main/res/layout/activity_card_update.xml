@@ -5,10 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="20dp"
+    android:background="@drawable/gradient"
     tools:context=".CardUpdateActivity">
+
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_width="match_parent"
+        android:background="@drawable/gradient"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintWidth_default="percent"
         app:layout_constraintHeight_default="percent"
@@ -16,11 +21,11 @@
         app:layout_constraintHeight_percent="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:background="@color/cardview_dark_background"
         tools:ignore="MissingConstraints">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:text="Редактирование карточки"
             android:textSize="26sp"/>
         <EditText
@@ -28,12 +33,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:hint="Введите иностранное слово"/>
         <EditText
             android:id="@+id/translatedWord"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:hint="Введите перевод"/>
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,12 +54,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="onUpdateCardClick"
+                android:layout_marginEnd="2dp"
                 android:text="Изменить"/>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#e74c3c"
+                android:layout_marginStart="2dp"
                 android:onClick="onDeleteCardClick"
                 android:text="Удалить"/>
         </LinearLayout>

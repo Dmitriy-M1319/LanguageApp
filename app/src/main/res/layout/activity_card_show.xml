@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient"
     tools:context=".CardShowActivity">
 
     <TextView
@@ -11,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Мои карточки"
+        android:textColor="@color/black"
         android:textSize="26sp"
         android:gravity="center"
         tools:ignore="MissingConstraints" />
