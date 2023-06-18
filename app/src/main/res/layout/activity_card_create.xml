@@ -31,23 +31,23 @@
             <TextView
                 android:layout_width="match_parent"
                 android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:layout_height="wrap_content"
                 android:text="Добавление новой карточки"
                 android:textSize="26sp"/>
             <EditText
                 android:id="@+id/foreignWord"
                 android:layout_width="match_parent"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:hint="Введите иностранное слово"/>
             <EditText
                 android:id="@+id/translatedWord"
                 android:layout_marginTop="5dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"

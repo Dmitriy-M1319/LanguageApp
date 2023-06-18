@@ -10,7 +10,7 @@
     <TextView android:id="@+id/selection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:text="Выберите, какие слова будете проверять в тестировании"
         android:textSize="26sp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -28,12 +28,12 @@
         <RadioButton android:id="@+id/foreign"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:text="Иностранные слова" />
         <RadioButton android:id="@+id/translated"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:text="Переводы иностранных слов" />
     </RadioGroup>
 

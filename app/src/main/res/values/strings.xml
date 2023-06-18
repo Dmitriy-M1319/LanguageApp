@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Language App</string>
+    <string name="app_name">EasyLanguage</string>
     <string name="btn1">btn1</string>
     <string name="btn2" />
     <string name="title_activity_test">TestActivity</string>
